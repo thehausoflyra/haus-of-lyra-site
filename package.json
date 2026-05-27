@@ -1,15 +1,22 @@
 {
   "name": "haus-of-lyra-website",
   "version": "1.0.0",
-  "description": "Node.js website for Haus of Lyra, running on Express.js",
-  "main": "app.js",
+  "private": true,
   "scripts": {
-    "start": "node app.js",
-    "dev": "node app.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "compression": "^1.7.5",
-    "express": "^4.21.2"
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
-  "private": true
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.7.2"
+  }
 }

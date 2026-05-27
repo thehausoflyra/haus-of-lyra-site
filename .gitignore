@@ -1,11 +1,16 @@
 # Node.js dependencies
 node_modules/
 
+# Next.js build and cache outputs
+.next/
+out/
+build/
+
 # OS-specific files
 .DS_Store
 Thumbs.db
 
-# Environments files
+# Environment variables
 .env
 .env.local
 .env.*.local
