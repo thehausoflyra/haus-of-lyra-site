@@ -1,0 +1,15 @@
+{
+  "name": "haus-of-lyra-website",
+  "version": "1.0.0",
+  "description": "Node.js website for Haus of Lyra, running on Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.5",
+    "express": "^4.21.2"
+  },
+  "private": true
+}
