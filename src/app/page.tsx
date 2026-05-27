@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface Star {
@@ -42,7 +42,9 @@ const BG_POSITIONS = [
 
 export default function Home() {
   const [activeStar, setActiveStar] = useState<string | null>(null);
+  const [hoveredStar, setHoveredStar] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   // Setup Scroll Reveal animations and Keyboard events
   useEffect(() => {
@@ -61,7 +63,10 @@ export default function Home() {
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsModalOpen(false);
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+        setLightboxImage(null);
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -72,9 +77,27 @@ export default function Home() {
     };
   }, []);
 
-  // Handle locking page scroll when Modal is open
+  // HoneyBook widget async loader
   useEffect(() => {
-    if (isModalOpen) {
+    const w = window as any;
+    w['HoneyBook'] = 'HoneyBook';
+    w['HoneyBook'] = w['HoneyBook'] || {};
+    w['HoneyBook'].q = w['HoneyBook'].q || [];
+    w['HoneyBook'].l = 1 * new Date().getTime();
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://widget.honeybook.com/assets/vendor/honeybooker.js';
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  // Handle locking page scroll when Modal or Lightbox is open
+  useEffect(() => {
+    if (isModalOpen || lightboxImage) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -82,9 +105,11 @@ export default function Home() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, lightboxImage]);
 
-  const activeStarData = STARS.find(s => s.id === activeStar);
+  const activeStarId = hoveredStar || activeStar;
+  const activeStarData = STARS.find(s => s.id === activeStarId);
+  const isStarActive = (id: string) => activeStar === id || hoveredStar === id;
 
   return (
     <div className="home-page-wrapper">
@@ -93,11 +118,11 @@ export default function Home() {
         <Link href="/" className="nav-logo">Haus of <span>Lyra</span></Link>
         <ul className="nav-links">
           <li><Link href="/" className="active">Home</Link></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="#about">About</a></li>
           <li><Link href="/seniors">Seniors</Link></li>
-          <li><a href="/weddings">Weddings</a></li>
-          <li><a href="/brand">Brand</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="#weddings">Weddings</a></li>
+          <li><a href="#services">Brand</a></li>
+          <li><a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Contact</a></li>
         </ul>
         <button className="btn btn-gold nav-cta" onClick={() => setIsModalOpen(true)}>Start Your Inquiry</button>
       </nav>
@@ -113,15 +138,15 @@ export default function Home() {
 
           <span className="hero-eyebrow eg">Des Moines, Iowa</span>
           <h1 className="hero-h1">
-            <span className="line"><span>This isn't your</span></span>
-            <span className="line"><span><em>average</em></span></span>
-            <span className="line"><span>photo session.</span></span>
+            <span className="line"><span>Where your</span></span>
+            <span className="line"><span><em>story</em> becomes</span></span>
+            <span className="line"><span>art.</span></span>
           </h1>
           <div className="hero-rule"></div>
           <p className="hero-p">We're Haus of Lyra — a creative studio in Des Moines for the people who want their photos to actually feel like them. Not stiff. Not overdone. Just intentional, editorial, and a little bit magnetic.</p>
           <div className="hero-btns">
             <button className="btn btn-gold" onClick={() => setIsModalOpen(true)}>Start Your Inquiry</button>
-            <a href="/about" className="btn btn-ol">Our Story</a>
+            <a href="#about" className="btn btn-ol">Our Story</a>
           </div>
         </div>
 
@@ -169,14 +194,14 @@ export default function Home() {
       </div>
 
       {/* WHO WE ARE */}
-      <div className="who">
+      <div id="about" className="who">
         <div className="who-text reveal">
           <span className="eyebrow ed">Who We Are</span>
           <h2>Artistry meets <em>real life.</em></h2>
           <span className="gold-bar" style={{ margin: '4px 0 24px' }}></span>
           <p>Haus of Lyra is where artistry meets real life. We photograph seniors who want more than a yearbook photo and weddings that deserve more than a highlight reel.</p>
           <p><strong>Every session is styled, directed, and crafted with intention</strong> — because your story is worth more than a quick click and a filter.</p>
-          <a href="/about" className="btn btn-ol-dark" style={{ marginTop: '32px', alignSelf: 'flex-start' }}>About the Studio</a>
+          <a href="#services" className="btn btn-ol-dark" style={{ marginTop: '32px', alignSelf: 'flex-start' }}>Our Services</a>
         </div>
         <div className="who-dark reveal d2">
           <blockquote className="who-quote">
@@ -215,10 +240,10 @@ export default function Home() {
             <h2>The stars we <em>navigate by.</em></h2>
             <span className="gold-bar" style={{ margin: '4px 0 22px' }}></span>
             <p>Lyra is a constellation built around Vega — one of the brightest stars in the sky. These are the values that shape every session, every film, and every client relationship we build.</p>
-            <span className="const-hint">Click a star to explore</span>
+            <span className="const-hint">Hover or click a star to explore</span>
 
             {/* Value reveal panel */}
-            <div className={`const-reveal ${!activeStar ? 'empty' : ''}`} id="constReveal">
+            <div className={`const-reveal ${!activeStarId ? 'empty' : ''}`} id="constReveal">
               {activeStarData ? (
                 <>
                   <span className="const-reveal-star">{activeStarData.name}</span>
@@ -251,7 +276,7 @@ export default function Home() {
               {LINES.map(([a, b], idx) => {
                 const s1 = starMap[a];
                 const s2 = starMap[b];
-                const isActiveLine = activeStar === a || activeStar === b;
+                const isActiveLine = activeStarId === a || activeStarId === b;
                 return (
                   <line
                     key={idx}
@@ -259,7 +284,7 @@ export default function Home() {
                     y1={s1.cy}
                     x2={s2.cx}
                     y2={s2.cy}
-                    stroke={isActiveLine ? 'rgba(206,173,111,0.45)' : 'rgba(206,173,111,0.15)'}
+                    stroke={isActiveLine ? 'rgba(206,173,111,0.55)' : 'rgba(206,173,111,0.15)'}
                     strokeWidth="1"
                   />
                 );
@@ -267,9 +292,16 @@ export default function Home() {
 
               {/* Stars */}
               {STARS.map((star) => {
-                const isActive = activeStar === star.id;
+                const isActive = isStarActive(star.id);
+                const isSelected = activeStar === star.id;
                 return (
-                  <g key={star.id} onClick={() => setActiveStar(activeStar === star.id ? null : star.id)}>
+                  <g
+                    key={star.id}
+                    onClick={() => setActiveStar(isSelected ? null : star.id)}
+                    onMouseEnter={() => setHoveredStar(star.id)}
+                    onMouseLeave={() => setHoveredStar(null)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     {isActive && (
                       <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(206,173,111,0.1)" />
                     )}
@@ -305,7 +337,7 @@ export default function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="services">
+      <section id="services" className="services">
         <div className="services-header reveal">
           <span className="eyebrow ew">What We Do</span>
           <h2>Four Ways We Work</h2>
@@ -318,27 +350,27 @@ export default function Home() {
             <p>Your senior year only happens once. Styled, directed, and designed around who you actually are — not some template.</p>
             <span className="svc-link">Explore →</span>
           </Link>
-          <div className="svc-item" onClick={() => window.location.href = '/weddings'}>
+          <a href="#weddings" className="svc-item">
             <div className="svc-num">02</div>
             <h3>Wedding Photography</h3>
             <div className="svc-rule"></div>
             <p>Over a decade behind the lens. We find the moments that matter — the ones you'll still be crying over in 20 years.</p>
             <span className="svc-link">Explore →</span>
-          </div>
-          <div className="svc-item" onClick={() => window.location.href = '/wedding-films'}>
+          </a>
+          <a href="#weddings" className="svc-item">
             <div className="svc-num">03</div>
             <h3>Wedding Videography</h3>
             <div className="svc-rule"></div>
             <p>Cinematic films that capture the energy, the laughter, and the chaos of the best day of your life.</p>
             <span className="svc-link">Explore →</span>
-          </div>
-          <div className="svc-item" onClick={() => window.location.href = '/brand'}>
+          </a>
+          <a href="#about" className="svc-item">
             <div className="svc-num">04</div>
             <h3>Brand + Commercial</h3>
             <div className="svc-rule"></div>
             <p>Your brand has a story. We'll help you tell it with editorial-quality visuals that actually convert.</p>
             <span className="svc-link">Explore →</span>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -359,15 +391,15 @@ export default function Home() {
       </div>
 
       {/* WEDDING PREVIEW */}
-      <div className="split">
+      <div id="weddings" className="split">
         <div className="split-text dark reveal">
           <span className="eyebrow eg">Weddings</span>
           <h2>Your wedding deserves an <em>artist</em>, not just a vendor.</h2>
           <span className="gold-bar" style={{ margin: '4px 0 24px' }}></span>
           <p>A decade of weddings. Every single one has reminded us why we do this. Your day is chaotic, emotional, and beautiful — and we know exactly how to capture all of it without making you pose for 45 minutes during cocktail hour.</p>
           <div className="split-btns">
-            <a href="/weddings" className="btn btn-ol">Photography</a>
-            <a href="/wedding-films" className="btn btn-ol">Films</a>
+            <a href="#work" className="btn btn-ol">Photography</a>
+            <a href="#" className="btn btn-ol" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Films &amp; Inquiry</a>
           </div>
         </div>
         <div className="split-photo">
@@ -376,32 +408,33 @@ export default function Home() {
       </div>
 
       {/* PHOTO RIVER */}
-      <div className="photo-river">
+      <div id="work" className="photo-river">
         <div className="river-header reveal">
           <h2>Selected <em>Work</em></h2>
+          <p style={{ color: 'rgba(241,239,238,0.4)', fontFamily: "'Josefin Sans', sans-serif", fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: '6px' }}>Click any photo to expand</p>
         </div>
         <div className="river-track">
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
           {/* duplicate for seamless loop */}
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
-          <div className="river-item"><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
         </div>
       </div>
 
@@ -430,7 +463,7 @@ export default function Home() {
           <p>We take on a limited number of clients each year because doing fewer things exceptionally well is always better than doing everything adequately. If this feels like a fit — reach out.</p>
           <div className="cta-btns">
             <button className="btn btn-gold" onClick={() => setIsModalOpen(true)}>Start Your Inquiry</button>
-            <a href="/about" className="btn btn-ol">Our Story</a>
+            <a href="#about" className="btn btn-ol">Our Story</a>
           </div>
         </div>
       </section>
@@ -444,10 +477,10 @@ export default function Home() {
           </div>
           <ul className="footer-links">
             <li><Link href="/">Home</Link></li>
-            <li><a href="/about">About</a></li>
+            <li><a href="#about">About</a></li>
             <li><Link href="/seniors">Seniors</Link></li>
-            <li><a href="/weddings">Weddings</a></li>
-            <li><a href="/brand">Brand</a></li>
+            <li><a href="#weddings">Weddings</a></li>
+            <li><a href="#services">Brand</a></li>
             <li><a href="mailto:hello@thehausoflyra.com">Email</a></li>
             <li><a href="https://instagram.com/thehausoflyra" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           </ul>
@@ -455,15 +488,47 @@ export default function Home() {
         <p className="footer-copy">&copy; 2026 Haus of Lyra Creative Studios. All rights reserved.</p>
       </footer>
 
-      {/* CONTACT MODAL */}
+      {/* CONTACT MODAL WITH HONEYBOOK */}
       <div id="contactModal" className={`modal-overlay ${isModalOpen ? 'open' : ''}`} onClick={(e) => { if(e.target === e.currentTarget) setIsModalOpen(false); }}>
         <div className="modal-box">
           <button className="modal-close" onClick={() => setIsModalOpen(false)} aria-label="Close">&times;</button>
           <span className="eyebrow em" style={{ marginBottom: '12px' }}>Inquiry</span>
           <h3>Let's start the conversation.</h3>
-          <p style={{ marginBottom: '24px' }}>Tell us what you're looking for and we'll be back to you within 48 hours.</p>
+          <p>Tell us what you're looking for and we'll be back to you within 48 hours.</p>
+          <div className="hb-p-69362501a7b735000728c367-2" style={{ marginTop: '24px' }}></div>
+          <img height="1" width="1" style={{ display: 'none' }} src="https://www.honeybook.com/p.png?pid=69362501a7b735000728c367" alt="" />
         </div>
       </div>
+
+      {/* FULLSCREEN LIGHTBOX FOR PHOTO RIVER */}
+      {lightboxImage && (
+        <div 
+          className="modal-overlay open" 
+          onClick={() => setLightboxImage(null)} 
+          style={{ zIndex: 600, background: 'rgba(10,9,8,0.96)' }}
+        >
+          <div style={{ position: 'relative', width: '90vw', height: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button 
+              className="modal-close" 
+              onClick={() => setLightboxImage(null)} 
+              style={{ top: '0px', right: '0px', color: '#FAF8F5' }}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <img 
+              src={lightboxImage} 
+              alt="Selected work from Haus of Lyra" 
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '100%', 
+                objectFit: 'contain',
+                border: '1px solid rgba(206,173,111,0.2)' 
+              }} 
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
