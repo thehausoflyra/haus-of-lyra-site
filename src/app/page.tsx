@@ -81,9 +81,6 @@ export default function Home() {
   useEffect(() => {
     const w = window as any;
     w['HoneyBook'] = 'HoneyBook';
-    w['HoneyBook'] = w['HoneyBook'] || {};
-    w['HoneyBook'].q = w['HoneyBook'].q || [];
-    w['HoneyBook'].l = 1 * new Date().getTime();
 
     const script = document.createElement('script');
     script.async = true;
@@ -91,7 +88,9 @@ export default function Home() {
     document.head.appendChild(script);
 
     return () => {
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
 
@@ -260,8 +259,8 @@ export default function Home() {
             <svg id="constSvg" viewBox="0 0 300 320" width="320" height="340">
               <defs>
                 <radialGradient id="sglow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#CEAD6F" stopOpacity="1"/>
-                  <stop offset="100%" stopColor="#CEAD6F" stopOpacity="0"/>
+                  <stop offset="0%" stopColor="var(--gold)" stopOpacity="1"/>
+                  <stop offset="100%" stopColor="var(--gold)" stopOpacity="0"/>
                 </radialGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="3" result="cb"/>
@@ -284,7 +283,7 @@ export default function Home() {
                     y1={s1.cy}
                     x2={s2.cx}
                     y2={s2.cy}
-                    stroke={isActiveLine ? 'rgba(206,173,111,0.55)' : 'rgba(206,173,111,0.15)'}
+                    stroke={isActiveLine ? 'rgba(var(--gold-rgb),0.55)' : 'rgba(var(--gold-rgb),0.15)'}
                     strokeWidth="1"
                   />
                 );
@@ -303,13 +302,13 @@ export default function Home() {
                     style={{ cursor: 'pointer' }}
                   >
                     {isActive && (
-                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(206,173,111,0.1)" />
+                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(var(--gold-rgb),0.1)" />
                     )}
                     <circle
                       cx={star.cx}
                       cy={star.cy}
                       r={star.r}
-                      fill={isActive ? '#CEAD6F' : 'rgba(206,173,111,0.5)'}
+                      fill={isActive ? 'var(--gold)' : 'rgba(var(--gold-rgb),0.5)'}
                       filter={isActive ? 'url(#glow)' : undefined}
                       style={{ transition: 'all 0.25s' }}
                     />
@@ -323,7 +322,7 @@ export default function Home() {
                         fontFamily="'Josefin Sans', sans-serif"
                         fontSize="8"
                         letterSpacing="2"
-                        fill="#CEAD6F"
+                        fill="var(--gold)"
                       >
                         {star.label.toUpperCase()}
                       </text>
@@ -523,7 +522,7 @@ export default function Home() {
                 maxWidth: '100%', 
                 maxHeight: '100%', 
                 objectFit: 'contain',
-                border: '1px solid rgba(206,173,111,0.2)' 
+                border: '1px solid rgba(var(--gold-rgb),0.2)' 
               }} 
             />
           </div>

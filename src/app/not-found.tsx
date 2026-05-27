@@ -32,7 +32,7 @@ export default function NotFound() {
           fontWeight: 600,
           letterSpacing: '0.32em',
           textTransform: 'uppercase',
-          color: '#CEAD6F',
+          color: 'var(--gold)',
           marginBottom: '24px',
           display: 'block',
         }}>
@@ -47,7 +47,7 @@ export default function NotFound() {
           marginBottom: '20px',
           letterSpacing: '-0.02em',
         }}>
-          4<em style={{ color: '#CEAD6F', fontStyle: 'italic', fontWeight: 300 }}>0</em>4
+          4<em style={{ color: 'var(--gold)', fontStyle: 'italic', fontWeight: 300 }}>0</em>4
         </h1>
         <p style={{
           fontSize: '16px',
@@ -65,8 +65,8 @@ export default function NotFound() {
           letterSpacing: '0.22em',
           textTransform: 'uppercase',
           padding: '15px 36px',
-          border: '2px solid #CEAD6F',
-          background: '#CEAD6F',
+          border: '2px solid var(--gold)',
+          background: 'var(--gold)',
           color: '#1A1816',
           transition: 'all 0.3s ease',
           cursor: 'pointer',

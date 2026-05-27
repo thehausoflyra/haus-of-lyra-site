@@ -110,9 +110,6 @@ export default function Seniors() {
   useEffect(() => {
     const w = window as any;
     w['HoneyBook'] = 'HoneyBook';
-    w['HoneyBook'] = w['HoneyBook'] || {};
-    w['HoneyBook'].q = w['HoneyBook'].q || [];
-    w['HoneyBook'].l = 1 * new Date().getTime();
 
     const script = document.createElement('script');
     script.async = true;
@@ -120,7 +117,9 @@ export default function Seniors() {
     document.head.appendChild(script);
 
     return () => {
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
 
@@ -435,7 +434,7 @@ export default function Seniors() {
             <strong>Add-Ons</strong>
             Hair &amp; makeup +$250 &nbsp;&bull;&nbsp; Multi-season return session +$400 &nbsp;&bull;&nbsp; Rush delivery (2 weeks) +$150 &nbsp;&bull;&nbsp; Extended gallery time +$100. All confirmed before your session.
           </p>
-          <button className="btn btn-ol" style={{ borderColor: 'rgba(206,173,111,0.4)', color: 'var(--gold)', flexShrink: 0 }} onClick={() => setIsModalOpen(true)}>Ask About Add-Ons</button>
+          <button className="btn btn-ol" style={{ borderColor: 'rgba(var(--gold-rgb),0.4)', color: 'var(--gold)', flexShrink: 0 }} onClick={() => setIsModalOpen(true)}>Ask About Add-Ons</button>
         </div>
       </section>
 
