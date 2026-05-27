@@ -259,8 +259,8 @@ export default function Home() {
             <svg id="constSvg" viewBox="0 0 300 320" width="320" height="340">
               <defs>
                 <radialGradient id="sglow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="var(--gold)" stopOpacity="1"/>
-                  <stop offset="100%" stopColor="var(--gold)" stopOpacity="0"/>
+                  <stop offset="0%" stopColor="#FAF8F5" stopOpacity="1"/>
+                  <stop offset="100%" stopColor="#FAF8F5" stopOpacity="0"/>
                 </radialGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="3" result="cb"/>
@@ -283,7 +283,7 @@ export default function Home() {
                     y1={s1.cy}
                     x2={s2.cx}
                     y2={s2.cy}
-                    stroke={isActiveLine ? 'rgba(var(--gold-rgb),0.55)' : 'rgba(var(--gold-rgb),0.15)'}
+                    stroke={isActiveLine ? 'rgba(250, 248, 245, 0.65)' : 'rgba(250, 248, 245, 0.18)'}
                     strokeWidth="1"
                   />
                 );
@@ -302,13 +302,13 @@ export default function Home() {
                     style={{ cursor: 'pointer' }}
                   >
                     {isActive && (
-                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(var(--gold-rgb),0.1)" />
+                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(250, 248, 245, 0.12)" />
                     )}
                     <circle
                       cx={star.cx}
                       cy={star.cy}
                       r={star.r}
-                      fill={isActive ? 'var(--gold)' : 'rgba(var(--gold-rgb),0.5)'}
+                      fill={isActive ? '#FAF8F5' : 'rgba(250, 248, 245, 0.45)'}
                       filter={isActive ? 'url(#glow)' : undefined}
                       style={{ transition: 'all 0.25s' }}
                     />
@@ -322,7 +322,7 @@ export default function Home() {
                         fontFamily="'Josefin Sans', sans-serif"
                         fontSize="8"
                         letterSpacing="2"
-                        fill="var(--gold)"
+                        fill="#FAF8F5"
                       >
                         {star.label.toUpperCase()}
                       </text>
