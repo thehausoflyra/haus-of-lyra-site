@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: 'Haus of Lyra is a creative studio in Des Moines, Iowa. Senior portraits, wedding photography, wedding films, and brand visuals — built with intention.',
 };
 
+// Prevent stale HTML caches from referencing removed /_next/static assets.
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: {
