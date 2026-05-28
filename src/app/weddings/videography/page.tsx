@@ -1,2 +1,6 @@
-export { default } from "@/app/weddings/film/page";
+import { redirect } from "next/navigation";
+
+export default function WeddingVideographyPage() {
+  redirect("/weddings/film");
+}
 
