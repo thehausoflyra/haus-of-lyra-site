@@ -10,10 +10,7 @@ const nextConfig: NextConfig = {
     workerThreads: false,
   },
   async redirects() {
-    return [
-      { source: "/weddings/film", destination: "/weddings/videography", permanent: false },
-      { source: "/weddings/photography", destination: "/weddings", permanent: false },
-    ];
+    return [];
   },
   async headers() {
     return [
