@@ -373,7 +373,7 @@ export default function Home() {
       {/* SENIOR PREVIEW */}
       <div className="split">
         <div className="split-photo">
-          <img src="/weddings/img_3724-2.jpg" alt="Wedding couple session" />
+          <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/bb4033b1-6acf-4b6e-8d17-4fd089492473/ADA-270.JPG" alt="Senior session portrait" />
         </div>
         <div className="split-text cream reveal">
           <span className="eyebrow ed">Seniors</span>

@@ -141,11 +141,13 @@ export default function Weddings() {
         <Link href="/" className="nav-logo">Haus of <span>Lyra</span></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
           <li><Link href="/seniors">Seniors</Link></li>
           <li><Link href="/weddings" className="active">Weddings</Link></li>
-          <li><a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Book Now</a></li>
+          <li><Link href="/brand">Brand</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
         </ul>
-        <button className="btn btn-gold nav-cta" onClick={() => setIsModalOpen(true)}>Book Now</button>
+        <button className="btn btn-gold nav-cta" onClick={() => setIsModalOpen(true)}>Start Your Inquiry</button>
       </nav>
 
       {/* HERO */}
@@ -162,8 +164,8 @@ export default function Weddings() {
           </h1>
           <p className="hero-p">Editorial-quality photography and cinematic wedding films for couples who want their day documented with intention, artistry, and an honest documentary heart.</p>
           <div className="hero-btns">
-            <button className="btn btn-gold" onClick={() => setIsModalOpen(true)}>Check Your Date</button>
-            <a href="#pricing" className="btn btn-ol">View Investment</a>
+            <Link href="/weddings/photography" className="btn btn-gold">Wedding Photography</Link>
+            <Link href="/weddings/film" className="btn btn-ol">Wedding Videography</Link>
           </div>
         </div>
         <div className="scroll-ind">
