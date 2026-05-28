@@ -15,6 +15,19 @@ const nextConfig: NextConfig = {
       { source: "/weddings/photography", destination: "/weddings", permanent: false },
     ];
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
