@@ -463,6 +463,8 @@ footer { background: var(--black); border-top: 1px solid rgba(var(--gold-rgb),0.
 
 /* CONSTELLATION */
 .constellation-section {
+  --gold: #CEAD6F;
+  --gold-rgb: 206, 173, 111;
   background: linear-gradient(160deg, #0c0e14 0%, #10121a 50%, #0e1018 100%);
   padding: 96px 40px;
   position: relative; overflow: hidden;

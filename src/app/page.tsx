@@ -42,7 +42,6 @@ const BG_POSITIONS = [
 
 export default function Home() {
   const [activeStar, setActiveStar] = useState<string | null>(null);
-  const [hoveredStar, setHoveredStar] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
@@ -106,9 +105,9 @@ export default function Home() {
     };
   }, [isModalOpen, lightboxImage]);
 
-  const activeStarId = hoveredStar || activeStar;
+  const activeStarId = activeStar;
   const activeStarData = STARS.find(s => s.id === activeStarId);
-  const isStarActive = (id: string) => activeStar === id || hoveredStar === id;
+  const isStarActive = (id: string) => activeStar === id;
 
   return (
     <div className="home-page-wrapper">
@@ -259,8 +258,8 @@ export default function Home() {
             <svg id="constSvg" viewBox="0 0 300 320" width="320" height="340">
               <defs>
                 <radialGradient id="sglow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#FAF8F5" stopOpacity="1"/>
-                  <stop offset="100%" stopColor="#FAF8F5" stopOpacity="0"/>
+                  <stop offset="0%" stopColor="#CEAD6F" stopOpacity="1"/>
+                  <stop offset="100%" stopColor="#CEAD6F" stopOpacity="0"/>
                 </radialGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="3" result="cb"/>
@@ -283,7 +282,7 @@ export default function Home() {
                     y1={s1.cy}
                     x2={s2.cx}
                     y2={s2.cy}
-                    stroke={isActiveLine ? 'rgba(250, 248, 245, 0.65)' : 'rgba(250, 248, 245, 0.18)'}
+                    stroke={isActiveLine ? 'rgba(206, 173, 111, 0.55)' : 'rgba(206, 173, 111, 0.15)'}
                     strokeWidth="1"
                   />
                 );
@@ -297,18 +296,16 @@ export default function Home() {
                   <g
                     key={star.id}
                     onClick={() => setActiveStar(isSelected ? null : star.id)}
-                    onMouseEnter={() => setHoveredStar(star.id)}
-                    onMouseLeave={() => setHoveredStar(null)}
                     style={{ cursor: 'pointer' }}
                   >
                     {isActive && (
-                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(250, 248, 245, 0.12)" />
+                      <circle cx={star.cx} cy={star.cy} r={star.r * 5} fill="rgba(206, 173, 111, 0.1)" />
                     )}
                     <circle
                       cx={star.cx}
                       cy={star.cy}
                       r={star.r}
-                      fill={isActive ? '#FAF8F5' : 'rgba(250, 248, 245, 0.45)'}
+                      fill={isActive ? '#CEAD6F' : 'rgba(206, 173, 111, 0.5)'}
                       filter={isActive ? 'url(#glow)' : undefined}
                       style={{ transition: 'all 0.25s' }}
                     />
@@ -322,7 +319,7 @@ export default function Home() {
                         fontFamily="'Josefin Sans', sans-serif"
                         fontSize="8"
                         letterSpacing="2"
-                        fill="#FAF8F5"
+                        fill="#CEAD6F"
                       >
                         {star.label.toUpperCase()}
                       </text>
@@ -419,9 +416,9 @@ export default function Home() {
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
           {/* duplicate for seamless loop */}
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
@@ -430,9 +427,9 @@ export default function Home() {
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/d85b391b-3f69-41a2-9267-be21ab4c2e96/senior-1.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/1511f3da-17dd-41d3-8d2c-dfd91ee84987/senior-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG" alt="" /></div>
           <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
         </div>
       </div>
