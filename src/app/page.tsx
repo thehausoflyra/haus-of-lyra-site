@@ -150,11 +150,11 @@ export default function Home() {
 
         <div className="hero-mosaic">
           <div className="hero-mosaic-top">
-            <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="Haus of Lyra photography" />
+            <img src="/weddings/img_3722-2.jpg" alt="Haus of Lyra photography" />
           </div>
           <div className="hero-mosaic-bot">
             <div className="mosaic-photo">
-              <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/bb4033b1-6acf-4b6e-8d17-4fd089492473/ADA-270.JPG" alt="Senior portrait" />
+              <img src="/weddings/img_3723-2.jpg" alt="Wedding portrait" />
             </div>
             <div className="mosaic-mono">
               <span className="hl-label">Haus of Lyra</span>
@@ -373,7 +373,7 @@ export default function Home() {
       {/* SENIOR PREVIEW */}
       <div className="split">
         <div className="split-photo">
-          <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/2fe4a0bd-d543-4fcf-a72f-548edb06df86/untitled-1.JPG" alt="Senior session" />
+          <img src="/weddings/img_3724-2.jpg" alt="Wedding couple session" />
         </div>
         <div className="split-text cream reveal">
           <span className="eyebrow ed">Seniors</span>
@@ -399,7 +399,7 @@ export default function Home() {
           </div>
         </div>
         <div className="split-photo">
-          <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG" alt="Wedding photography" />
+          <img src="/weddings/img_3723-2.jpg" alt="Wedding photography" />
         </div>
       </div>
 
@@ -410,27 +410,27 @@ export default function Home() {
           <p style={{ color: 'rgba(241,239,238,0.4)', fontFamily: "'Josefin Sans', sans-serif", fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: '6px' }}>Click any photo to expand</p>
         </div>
         <div className="river-track">
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3725-2.jpg")}><img src="/weddings/img_3725-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3726-2.jpg")}><img src="/weddings/img_3726-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3722-2.jpg")}><img src="/weddings/img_3722-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3724-2.jpg")}><img src="/weddings/img_3724-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3727-2.jpg")}><img src="/weddings/img_3727-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3729-2.jpg")}><img src="/weddings/img_3729-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3723-2.jpg")}><img src="/weddings/img_3723-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3731-2.jpg")}><img src="/weddings/img_3731-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3732-2.jpg")}><img src="/weddings/img_3732-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3724-2.jpg")}><img src="/weddings/img_3724-2.jpg" alt="" /></div>
           {/* duplicate for seamless loop */}
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/93307ba2-7ade-4dfe-bccd-6122e60c6fc8/42.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c3f200fc-4ea4-421a-8099-19661a0899fb/untitled-274-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/7ed5fe20-09a0-4ce5-a01e-54eabec5c60d/untitled-28-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/18ec6f0e-562a-4d19-b022-fc0c0311cece/untitled-372-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/6899d2d8-852c-49b4-aea9-b4792551f8d0/untitled-4-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ccc269e-ecdc-4cad-b263-1afde14cd1b9/untitled-121-RT.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG" alt="" /></div>
-          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG")}><img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/a4f35431-328e-4d71-b0cf-748416ac12ba/untitled-36-RT.JPG" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3725-2.jpg")}><img src="/weddings/img_3725-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3726-2.jpg")}><img src="/weddings/img_3726-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3722-2.jpg")}><img src="/weddings/img_3722-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3724-2.jpg")}><img src="/weddings/img_3724-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3727-2.jpg")}><img src="/weddings/img_3727-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3729-2.jpg")}><img src="/weddings/img_3729-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3723-2.jpg")}><img src="/weddings/img_3723-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3731-2.jpg")}><img src="/weddings/img_3731-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3732-2.jpg")}><img src="/weddings/img_3732-2.jpg" alt="" /></div>
+          <div className="river-item" style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage("/weddings/img_3724-2.jpg")}><img src="/weddings/img_3724-2.jpg" alt="" /></div>
         </div>
       </div>
 
@@ -451,7 +451,7 @@ export default function Home() {
       {/* FINAL CTA */}
       <section className="final-cta">
         <div className="cta-bg">
-          <img src="https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c512a4bb-4b6f-4120-a2f2-a45e8a089f36/ADA-418.JPG" alt="" />
+          <img src="/weddings/img_3732-2.jpg" alt="" />
         </div>
         <div className="cta-content reveal">
           <span className="eyebrow eg">Ready?</span>

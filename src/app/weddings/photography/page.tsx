@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const PHOTO_FRAMES = [
-  "https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/3ba987e8-0f56-4c22-bcb1-22696ef84525/untitled-163-Edit-RT.JPG",
-  "https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/c08dc64a-58d0-4391-800c-b466eb9320fa/untitled-395.JPG",
-  "https://images.squarespace-cdn.com/content/v1/6917ac5a8e78b57cd3f9287c/22e3c764-02bd-412d-a61c-9f64656f120b/Untitled+design+-+66.JPG",
+  "/weddings/img_3722-2.jpg",
+  "/weddings/img_3725-2.jpg",
+  "/weddings/img_3732-2.jpg",
 ];
 
 export default function WeddingPhotographyPage() {
