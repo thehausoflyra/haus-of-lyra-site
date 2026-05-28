@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
 export default function WeddingFilmPage() {
-  redirect("/weddings");
+  redirect("/weddings/videography");
 }
 
