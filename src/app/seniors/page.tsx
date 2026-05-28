@@ -142,8 +142,8 @@ export default function Seniors() {
         <Link href="/" className="nav-logo">Haus of <span>Lyra</span></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
-          <li><a href="/about">About</a></li>
           <li><Link href="/seniors" className="active">Seniors</Link></li>
+          <li><Link href="/weddings">Weddings</Link></li>
           <li><a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Book Now</a></li>
         </ul>
         <button className="btn btn-gold nav-cta" onClick={() => setIsModalOpen(true)}>Book Now</button>
@@ -484,8 +484,8 @@ export default function Seniors() {
           </div>
           <ul className="footer-links">
             <li><Link href="/">Home</Link></li>
-            <li><a href="/about">About</a></li>
             <li><Link href="/seniors">Seniors</Link></li>
+            <li><Link href="/weddings">Weddings</Link></li>
             <li><a href="mailto:hello@thehausoflyra.com">Email</a></li>
             <li><a href="https://instagram.com/thehausoflyra" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           </ul>

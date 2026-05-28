@@ -119,7 +119,7 @@ export default function Home() {
           <li><Link href="/" className="active">Home</Link></li>
           <li><a href="#about">About</a></li>
           <li><Link href="/seniors">Seniors</Link></li>
-          <li><a href="#weddings">Weddings</a></li>
+          <li><Link href="/weddings">Weddings</Link></li>
           <li><a href="#services">Brand</a></li>
           <li><a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Contact</a></li>
         </ul>
@@ -349,20 +349,20 @@ export default function Home() {
             <p>Your senior year only happens once. Styled, directed, and designed around who you actually are — not some template.</p>
             <span className="svc-link">Explore →</span>
           </Link>
-          <a href="#weddings" className="svc-item">
+          <Link href="/weddings" className="svc-item">
             <div className="svc-num">02</div>
             <h3>Wedding Photography</h3>
             <div className="svc-rule"></div>
             <p>Over a decade behind the lens. We find the moments that matter — the ones you'll still be crying over in 20 years.</p>
             <span className="svc-link">Explore →</span>
-          </a>
-          <a href="#weddings" className="svc-item">
+          </Link>
+          <Link href="/weddings" className="svc-item">
             <div className="svc-num">03</div>
             <h3>Wedding Videography</h3>
             <div className="svc-rule"></div>
             <p>Cinematic films that capture the energy, the laughter, and the chaos of the best day of your life.</p>
             <span className="svc-link">Explore →</span>
-          </a>
+          </Link>
           <a href="#about" className="svc-item">
             <div className="svc-num">04</div>
             <h3>Brand + Commercial</h3>
@@ -397,7 +397,7 @@ export default function Home() {
           <span className="gold-bar" style={{ margin: '4px 0 24px' }}></span>
           <p>A decade of weddings. Every single one has reminded us why we do this. Your day is chaotic, emotional, and beautiful — and we know exactly how to capture all of it without making you pose for 45 minutes during cocktail hour.</p>
           <div className="split-btns">
-            <a href="#work" className="btn btn-ol">Photography</a>
+            <Link href="/weddings" className="btn btn-ol">The Wedding Experience</Link>
             <a href="#" className="btn btn-ol" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Films &amp; Inquiry</a>
           </div>
         </div>
