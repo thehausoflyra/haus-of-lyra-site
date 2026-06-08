@@ -117,8 +117,9 @@ export default function Home() {
         <ul className="nav-links">
           <li><Link href="/" className="active">Home</Link></li>
           <li><a href="#about">About</a></li>
-          <li><Link href="/seniors">Seniors</Link></li>
-          <li><Link href="/weddings">Weddings</Link></li>
+          <li><Link href="/senior-photo">Seniors</Link></li>
+          <li><Link href="/wedding-photo">Wedding Photo</Link></li>
+          <li><Link href="/wedding-video">Wedding Film</Link></li>
           <li><a href="#services">Brand</a></li>
           <li><a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Contact</a></li>
         </ul>
@@ -339,21 +340,21 @@ export default function Home() {
           <h2>Four Ways We Work</h2>
         </div>
         <div className="svc-grid reveal d1">
-          <Link href="/seniors" className="svc-item">
+          <Link href="/senior-photo" className="svc-item">
             <div className="svc-num">01</div>
             <h3>Senior Portraits</h3>
             <div className="svc-rule"></div>
             <p>Your senior year only happens once. Styled, directed, and designed around who you actually are — not some template.</p>
             <span className="svc-link">Explore →</span>
           </Link>
-          <Link href="/weddings" className="svc-item">
+          <Link href="/wedding-photo" className="svc-item">
             <div className="svc-num">02</div>
             <h3>Wedding Photography</h3>
             <div className="svc-rule"></div>
             <p>Over a decade behind the lens. We find the moments that matter — the ones you'll still be crying over in 20 years.</p>
             <span className="svc-link">Explore →</span>
           </Link>
-          <Link href="/weddings" className="svc-item">
+          <Link href="/wedding-video" className="svc-item">
             <div className="svc-num">03</div>
             <h3>Wedding Videography</h3>
             <div className="svc-rule"></div>
@@ -381,7 +382,7 @@ export default function Home() {
           <span className="gold-bar" style={{ margin: '4px 0 24px' }}></span>
           <p>Fully styled editorial sessions, creative direction, and images that actually capture your personality — not just your outfit. This is the session your friends are going to ask about.</p>
           <div className="split-btns">
-            <Link href="/seniors" className="btn btn-ol-dark">The Senior Experience</Link>
+            <Link href="/senior-photo" className="btn btn-ol-dark">The Senior Experience</Link>
           </div>
         </div>
       </div>
@@ -394,8 +395,8 @@ export default function Home() {
           <span className="gold-bar" style={{ margin: '4px 0 24px' }}></span>
           <p>A decade of weddings. Every single one has reminded us why we do this. Your day is chaotic, emotional, and beautiful — and we know exactly how to capture all of it without making you pose for 45 minutes during cocktail hour.</p>
           <div className="split-btns">
-            <Link href="/weddings" className="btn btn-ol">The Wedding Experience</Link>
-            <a href="#" className="btn btn-ol" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Films &amp; Inquiry</a>
+            <Link href="/wedding-photo" className="btn btn-ol" style={{ marginRight: '12px', marginBottom: '8px' }}>Wedding Photography</Link>
+            <Link href="/wedding-video" className="btn btn-ol" style={{ marginBottom: '8px' }}>Wedding Film</Link>
           </div>
         </div>
         <div className="split-photo">
@@ -473,10 +474,9 @@ export default function Home() {
           </div>
           <ul className="footer-links">
             <li><Link href="/">Home</Link></li>
-            <li><a href="#about">About</a></li>
-            <li><Link href="/seniors">Seniors</Link></li>
-            <li><a href="#weddings">Weddings</a></li>
-            <li><a href="#services">Brand</a></li>
+            <li><Link href="/senior-photo">Seniors</Link></li>
+            <li><Link href="/wedding-photo">Wedding Photo</Link></li>
+            <li><Link href="/wedding-video">Wedding Film</Link></li>
             <li><a href="mailto:hello@thehausoflyra.com">Email</a></li>
             <li><a href="https://instagram.com/thehausoflyra" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           </ul>
