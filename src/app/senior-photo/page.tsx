@@ -142,6 +142,7 @@ export default function SeniorPhoto() {
         <Link href="/" className="nav-logo">Haus of <span>Lyra</span></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
           <li><Link href="/senior-photo" className="active">Seniors</Link></li>
           <li><Link href="/wedding-photo">Wedding Photo</Link></li>
           <li><Link href="/wedding-video">Wedding Film</Link></li>

@@ -99,6 +99,7 @@ export default function WeddingPhoto() {
         <Link href="/" className="nav-logo">Haus of <span>Lyra</span></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
           <li><Link href="/senior-photo">Seniors</Link></li>
           <li><Link href="/wedding-photo" className="active">Wedding Photo</Link></li>
           <li><Link href="/wedding-video">Wedding Film</Link></li>
